@@ -1,0 +1,12 @@
+node('gameoflifebuildnode1') {
+    stage('scm') {
+        git 'https://github.com/venu87/openmrs-core.git'
+    }
+    stage('build') {
+        sh 'mvn package'
+    }
+    stage('postbuild') {
+        junit '**/TEST-*.xml'
+        archive '**/*.war'
+    }
+}
